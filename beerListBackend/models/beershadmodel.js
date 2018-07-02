@@ -3,6 +3,7 @@ module.exports = function (sequelize, DataTypes) {
     return sequelize.define('mybeershad', {
         beername: {
             type: DataTypes.STRING,
+            unique:true
         },
         
         myrating: {

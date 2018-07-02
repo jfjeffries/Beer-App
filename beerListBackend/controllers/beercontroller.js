@@ -107,23 +107,23 @@ router.put('/update/:beername', function(req, res) {
         )
 });
 
-//Delete item by ID:
+// Delete item by ID:
 
-// router.delete('/delete/:id', function(req, res) {
-//     var data = req.params.id;
-//     var userid = req.user.id;
+router.delete('/delete/:id', function(req, res) {
+    var data = req.params.id;
+    var userid = req.user.id;
 
-//     AuthBeerData
-//         .destroy({
-//             where: { id: data, owner: userid }
-//         }).then(
-//             function deleteLogSuccess(data){
-//                 res.send("you removed a log");
-//             },
-//             function deleteLogError(err){
-//                 res.send(500, err.message);
-//             }
-//         );
-// });
+    AuthBeerData
+        .destroy({
+            where: { id: data, owner: userid }
+        }).then(
+            function deleteBeerSuccess(data){
+                res.send("you removed a log");
+            },
+            function deleteBeerError(err){
+                res.send(500, err.message);
+            }
+        );
+});
 
 module.exports = router;

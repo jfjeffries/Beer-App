@@ -2,31 +2,52 @@ import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Signup from './Signup';
 import Login from './Login'
-    //1
+
 const Auth = (props) => {
     return (
-        <Container style={authContainer}>
+        <div style = {wrapper}>
+            <h1 style = {title}>Welcome to the Beer Drinker's Helper!!</h1>
             <Row>
-                <Col md="6">
-                    <div><Signup setToken={props.setToken}/></div>
-                </Col>
-                <Col md="6" style={loginCol}>
-                    <div><Login setToken={props.setToken}/></div>
+                <Col xs="2" sm="4">
+                    <div><Signup setToken={props.setToken} setUser={props.setUser} /></div>  
                 </Col>
             </Row>
-        </Container>
+            <Row>
+                <Col xs="2" sm="4">
+                    <div><Login setToken={props.setToken} setUser={props.setUser} /></div>
+                </Col>
+            </Row>
+        </div>
     )
 }
 export default Auth;
 
 const authContainer = {
-    marginTop: '5em',
+    marginTop: '2em',
     padding: '2em',
     border: '1px solid #e5e5e5',
     borderRadius:'0.4em',
-    boxShadow: '2px solid black'
 }
 
 const loginCol = {
     borderLeft:'1px solid black',
 }
+
+const wrapper={
+    backgroundColor: 'gray',
+    height: '100%',
+    width: '100%',
+    background: 'stretch',
+    textAlign: 'center',
+    margin: '0',
+    minHeight: '100%',
+    position: 'fixed',
+    display: 'block'
+  }
+
+  const title={
+      margin:'auto',
+      color: 'white',
+      marginTop:'2.5%'
+
+  }

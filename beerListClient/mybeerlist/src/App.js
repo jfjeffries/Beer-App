@@ -24,6 +24,11 @@ class App extends Component {
       this.setState({ sessionToken: token });
     }
 }
+setUser = (x) => {
+  this.setState({
+    username:x
+  })
+}
 setSessionState = (token) => {
   localStorage.setItem('token', token);
   this.setState({ sessionToken: token });
@@ -48,7 +53,7 @@ protectedViews = () => {
   } else {
     return (
       <Route path="/" >
-        <Auth setToken={this.setSessionState}/>
+        <Auth setToken={this.setSessionState} setUser={this.setUser} username={this.state.username}/>
       </Route>
     )
   }
@@ -57,8 +62,8 @@ protectedViews = () => {
   render() {
     return (
       <Router>
-        <div >
-          <Head clickLogout={this.logout}/>
+        <div style={mainDivStyle}>
+          <Head clickLogout={this.logout} username={this.state.username}/>
           {this.protectedViews()}
         </div>
       </Router>
@@ -67,3 +72,10 @@ protectedViews = () => {
 }
 
 export default App;
+
+const mainDivStyle={
+    zIndex:'500',
+    margin:'0',
+    width:'100%',
+    height:'100%',
+}

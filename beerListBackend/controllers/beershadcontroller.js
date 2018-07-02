@@ -50,17 +50,39 @@ router.post('/addbeer', function (req, res) {
             }
         );
 });
+//Update a beer by ID:
 
+router.put('/update/:beername', function(req, res) {
+    var data = req.params.beername;
+    var mybeershad = req.body.mybeershad
+    
+    AuthBeerData
+        .update({ 
+            mybeershad : mybeershad.item,
+            myrating : mybeershad.myrating,
+        },
+        {where: {beername: data}}
+        ).then(
+            function updateSuccess(updatedLog) {
+                res.json({
+                    mybeershad: mybeershad
+                });            
+            },
+            function updateError(err){
+                res.send(500, err.message);
+            }
+        )
+});
 
 //Delete item by ID:
 
-router.delete('/delete/:beername', function(req, res) {
+router.delete('/delete/:id', function(req, res) {
     var data = req.params.id;
     var userid = req.user.id;
-
+    console.log(userid)
     AuthBeerData
         .destroy({
-            where: { beername: data, id: userid }
+            where: { id: data, owner: userid }
         }).then(
             function deleteLogSuccess(data){
                 res.send("you removed a beer");

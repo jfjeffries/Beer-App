@@ -2,7 +2,7 @@ var router = require('express').Router();
 var sequelize = require('../db');
 var User = sequelize.import('../models/usermodel');
 var AuthBeerData = sequelize.import('../models/beermodel.js');
-
+const Op = sequelize.Op
 
 //Get all beers:
 
@@ -57,14 +57,14 @@ router.post('/create', function (req, res) {
         );
 });
 
-//Get single beer by name of beer:
+//Search for beers(?):
 
 router.get('/:beername', function(req, res) {
     var data = req.params.beername;
 
     AuthBeerData
-        .findOne({
-            where: { beername: data }
+        .findAll({
+            where: {[Op.like]:data}
         }).then(
             function findOneSuccess(data) {
                 res.json(data);

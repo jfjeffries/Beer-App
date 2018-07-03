@@ -18,6 +18,6 @@ app.use('/api/log', log);
 app.use('/api/beerhad', beerhad);
 
 
-app.listen(3000, function(){
-    console.log('App is listening on 3000.')
+app.listen(process.env.PORT, () => {
+    console.log(`App is listening on port ${process.env.PORT}.`)
 });

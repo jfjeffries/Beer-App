@@ -3,8 +3,6 @@ var sequelize = require('../db');
 var User = sequelize.import('../models/usermodel');
 var AuthBeerData = sequelize.import('../models/beermodel.js');
 const Op = sequelize.Op
-// const Query = sequelize.query();
-//Get all beers:
 
 router.get('/getall', function (req, res) {
     // var userid = req.user.id;
@@ -57,17 +55,15 @@ router.post('/create', function (req, res) {
         );
 });
 
-//Search for beers(?):
-
-
+//Search for beers:
 
 router.post('/getsome/:query', function(req, res) {
     var data = req.body.query;
-    console.log("server data: ",data)
     AuthBeerData.findAll({
-        where: {
-            beername:{
-                [Op.like]: `%${data}%`
+        where: {[Op.or]:{
+                beername:{[Op.iLike]: `%${data}%`},
+                brewery:{[Op.iLike]: `%${data}%`},
+                styleof:{[Op.iLike]: `%${data}%`},
             }
         }
     })
@@ -80,23 +76,6 @@ router.post('/getsome/:query', function(req, res) {
         }
     );
 })
-
-//     sequelize
-//         .query('SELECT * FROM AuthBeerData').success((results) => {
-            
-//         })
-            
-//         ).then(
-//             function findOneSuccess(data) {
-//                 res.json(data);
-//             },
-//             function findOneError(err) {
-//                 res.send(500, err.message);
-//             }
-//         );
-// });
-
-//Update a beer by ID:
 
 router.put('/update/:beername', function(req, res) {
     var data = req.params.beername;

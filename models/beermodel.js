@@ -29,7 +29,8 @@ module.exports = function (sequelize, DataTypes) {
         abv: {
             type: DataTypes.INTEGER,
             validate:{
-                max:20
+                max:20,
+                
             }
         },
         comments: {

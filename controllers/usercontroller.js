@@ -27,9 +27,6 @@ router.post('/createuser', function(req, res) {
         function createError(err){
             res.send(500, err.message);
         }
-        .catch(Sequelize.ValidationError, function (err){
-            return res.status(442).send(err.errors)
-        })
     );
   });
   
